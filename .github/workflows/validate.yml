@@ -35,10 +35,13 @@ jobs:
           $root = (Get-Location).Path
           $missing = @()
           Get-ChildItem -Recurse -Filter *.md | ForEach-Object {
-            $text = Get-Content $_.FullName -Raw
+            $file = $_.FullName
+            $directory = $_.DirectoryName
+            $text = Get-Content $file -Raw
             [regex]::Matches($text, '\[[^\]]+\]\((?!https?://|mailto:|#)([^)#]+)') | ForEach-Object {
-              $target = Join-Path $_.Path '..' | Join-Path -ChildPath $_.Groups[1].Value
-              if (-not (Test-Path $target)) { $missing += "$($_.Path): $($_.Groups[1].Value)" }
+              $relative = $_.Groups[1].Value
+              $target = Join-Path $directory $relative
+              if (-not (Test-Path $target)) { $missing += "${file}: $relative" }
             }
           }
           if ($missing) { $missing; exit 1 }
