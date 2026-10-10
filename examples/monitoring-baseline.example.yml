@@ -1,0 +1,21 @@
+checks:
+  - name: gateway_tls
+    severity: critical
+    interval_seconds: 60
+  - name: certificate_expiry
+    severity: high
+    threshold_days: 30
+  - name: session_host_availability
+    severity: critical
+    minimum_healthy_hosts: 1
+  - name: fslogix_attach_failures
+    severity: high
+    window_minutes: 10
+    threshold: 3
+  - name: authentication_failures
+    severity: high
+    window_minutes: 5
+    threshold: 20
+  - name: backup_age
+    severity: critical
+    threshold_hours: 26

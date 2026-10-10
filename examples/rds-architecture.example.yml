@@ -1,0 +1,26 @@
+environment: example
+windows_server: "2025"
+access:
+  public_rdp: false
+  vpn: true
+  rd_gateway:
+    enabled: true
+    fqdn: gateway.example.invalid
+    mfa: true
+rds:
+  broker: rds-broker-01.example.invalid
+  gateway: rds-gateway-01.example.invalid
+  session_hosts:
+    - rds-host-01.example.invalid
+    - rds-host-02.example.invalid
+  licensing_mode: per_user
+profiles:
+  technology: fslogix
+  path: "\\\\files.example.invalid\\profiles$"
+security:
+  nla: required
+  application_control: audit_then_enforce
+  privileged_access: dedicated_accounts
+monitoring:
+  certificate_expiry_days: 30
+  logon_duration_seconds: 45

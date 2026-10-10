@@ -1,0 +1,50 @@
+name: Validate guide
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse PowerShell
+        shell: pwsh
+        run: |
+          $errors = @()
+          Get-ChildItem scripts -Filter *.ps1 | ForEach-Object {
+            $tokens = $null
+            $parseErrors = $null
+            [void][System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$tokens, [ref]$parseErrors)
+            $errors += $parseErrors
+          }
+          if ($errors.Count) { $errors | Format-List; exit 1 }
+      - name: Validate YAML
+        shell: pwsh
+        run: |
+          Install-Module powershell-yaml -Force -Scope CurrentUser
+          Get-ChildItem examples -Filter *.yml | ForEach-Object {
+            Get-Content $_.FullName -Raw | ConvertFrom-Yaml | Out-Null
+          }
+      - name: Validate Markdown links and whitespace
+        shell: pwsh
+        run: |
+          $bad = Select-String -Path README.md,docs/*.md,reference/*.md,templates/*.md -Pattern '[ 	]+$'
+          if ($bad) { $bad; exit 1 }
+          $root = (Get-Location).Path
+          $missing = @()
+          Get-ChildItem -Recurse -Filter *.md | ForEach-Object {
+            $text = Get-Content $_.FullName -Raw
+            [regex]::Matches($text, '\[[^\]]+\]\((?!https?://|mailto:|#)([^)#]+)') | ForEach-Object {
+              $target = Join-Path $_.Path '..' | Join-Path -ChildPath $_.Groups[1].Value
+              if (-not (Test-Path $target)) { $missing += "$($_.Path): $($_.Groups[1].Value)" }
+            }
+          }
+          if ($missing) { $missing; exit 1 }
+      - name: Secret-pattern scan
+        shell: pwsh
+        run: |
+          $patterns = 'BEGIN (RSA|OPENSSH|EC) PRIVATE KEY','password\s*[:=]\s*[^<\s]','AKIA[0-9A-Z]{16}'
+          $hits = Select-String -Path README.md,docs/*.md,reference/*.md,templates/*.md,examples/*.yml,scripts/*.ps1 -Pattern $patterns
+          if ($hits) { $hits; exit 1 }

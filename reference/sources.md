@@ -1,0 +1,15 @@
+# Primary sources
+
+- [Microsoft: Remote Desktop Services](https://learn.microsoft.com/windows-server/remote/remote-desktop-services/)
+- [Microsoft: RD Gateway](https://learn.microsoft.com/windows-server/remote/remote-desktop-services/rds-roles)
+- [Microsoft Security Baselines](https://learn.microsoft.com/windows/security/operating-system-security/device-management/windows-security-configuration-framework/windows-security-baselines)
+- [Microsoft: FSLogix](https://learn.microsoft.com/fslogix/)
+- [Microsoft: Network Level Authentication](https://learn.microsoft.com/windows-server/remote/remote-desktop-services/clients/remote-desktop-allow-access)
+- [Microsoft: Windows LAPS](https://learn.microsoft.com/windows-server/identity/laps/laps-overview)
+- [Microsoft: AppLocker](https://learn.microsoft.com/windows/security/application-security/application-control/app-control-for-business/applocker/applocker-overview)
+- [Microsoft: Windows Defender Application Control](https://learn.microsoft.com/windows/security/application-security/application-control/app-control-for-business/)
+- [Microsoft lifecycle: Windows Server 2016](https://learn.microsoft.com/lifecycle/products/windows-server-2016)
+- [CISA: StopRansomware Guide](https://www.cisa.gov/stopransomware/ransomware-guide)
+- [NIST SP 800-63B Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63b.html)
+- [SARABEL: Windows Server Active Directory Hardening](https://github.com/sarabelinformatika/windows-server-active-directory-hardening)
+- [SARABEL: Windows Server 2016 support ends in 2027](https://sarabelinformatika.hu/blog/windows-server-2016-tamogatas-vege-2027-ben-mit-kell-tenniuk-a-vallalkozasoknak)

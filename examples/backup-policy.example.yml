@@ -1,0 +1,22 @@
+policy:
+  rpo_hours: 24
+  rto_hours: 8
+  copies: 3
+  media_types: 2
+  offsite_or_isolated: true
+scope:
+  - active_directory_system_state
+  - gateway_and_nps_configuration
+  - broker_database
+  - gpo_backups
+  - certificates_and_private_keys
+  - application_data
+  - profile_configuration
+  - monitoring_configuration
+retention:
+  daily: 7
+  weekly: 4
+  monthly: 12
+validation:
+  isolated_restore_test: quarterly
+  business_acceptance: required
