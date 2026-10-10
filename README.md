@@ -1,7 +1,7 @@
 # Windows Server RDS Security Guide
 
 <p align="center">
-  <img src="images/windows-server-rds-security-guide.png" alt="Windows Server RDS Security Guide">
+  <img src="images/windows-server-rds-security-guide.jpg" alt="Windows Server RDS Security Guide">
 </p>
 
 ![Platform](https://img.shields.io/badge/Platform-Windows%20Server-1677B8?style=flat-square)
